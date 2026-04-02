@@ -16,15 +16,19 @@
         "declaration": true,
         "sourceMap": true,
         "declarationMap": true,
+        /* `noEmit` is required because we want to compile the TS file into JS. */
+        "noEmit": false,
+        /* we need to unset `allowImportingTsExtensions` for `noEmit` to work. */
+        "allowImportingTsExtensions": false
     },
     "files": [
-        "./server.ts"
+        "server.ts"
     ],
     "include": [
-        "./server.ts"
-    ],
+        "./server"
+, "server.ts"    ],
     "exclude": [
-        "./src/**/*.ts",
+        "./client",
         "./vite.config.ts"
     ]
 }

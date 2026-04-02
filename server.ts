@@ -1,7 +1,12 @@
+/**
+ * Express.js Server with support of TS
+ */
 import fs from 'node:fs/promises'
 import express from 'express'
 import dotenv from 'dotenv'
 import type { ViteDevServer } from 'vite'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url';
 
 // Constants
 dotenv.config()
@@ -9,9 +14,14 @@ const isProduction = process.env['NODE_ENV'] === 'production'
 const port = process.env['PORT'] || 5173
 const base = process.env['BASE'] || '/'
 
+// path utilities
+const __dirname: string = path.dirname(fileURLToPath(import.meta.url));
+const root: string = process.cwd();
+const resolve = (_path: string) => path.resolve(__dirname, _path);
+
 // Cached production assets
 const templateHtml = isProduction
-    ? await fs.readFile('./dist/client/index.html', 'utf-8')
+    ? await fs.readFile(resolve('./client/index.html'), 'utf-8')
     : ''
 
 // Create http server
@@ -53,7 +63,7 @@ app.use('*all', async (req, res) => {
 
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            render = (await import('./dist/server/entry-server.js')).render
+            render = (await import(resolve('./server/entry-server.js'))).render
         }
 
         const rendered = await render(url)

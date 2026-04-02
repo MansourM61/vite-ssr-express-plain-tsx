@@ -5,11 +5,12 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "bun server",
-        "build": "bun run build:client && bun run build:server",
-        "build:client": "vite build --outDir dist/client",
-        "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
-        "preview": "cross-env NODE_ENV=production bun server"
+        "dev": "bun ./server.ts",
+        "build": "bun run build:client-entry && bun run build:server-entry && bun run build:server-app",
+        "build:client-entry": "vite build --outDir dist/client",
+        "build:server-entry": "vite build --ssr src/entry-server.ts --outDir dist/server",
+        "build:server-app": "tsc -p ./tsconfig.app.json",
+        "preview": "cross-env NODE_ENV=production node ./dist/server.js"
     },
     "dependencies": {
         "compression": "^1.8.1",

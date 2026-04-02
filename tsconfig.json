@@ -1,4 +1,11 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig"
-    /* This empty file is only used for grouping the configuration files.*/
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.web.json"
+        }
+    ]
 }
