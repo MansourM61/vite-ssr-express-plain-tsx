@@ -1,0 +1,30 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "./",
+        "outDir": "dist",
+        /* added types from @types */
+        "types": [
+            "bun"
+        ],
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        /* transpilation settings */
+        "module": "esnext",
+        "target": "esnext",
+        "declaration": true,
+        "sourceMap": true,
+        "declarationMap": true,
+    },
+    "files": [
+        "./server.ts"
+    ],
+    "include": [
+        "./server.ts"
+    ],
+    "exclude": [
+        "./src/**/*.ts",
+        "./vite.config.ts"
+    ]
+}

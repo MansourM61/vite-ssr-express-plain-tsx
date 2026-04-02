@@ -7,3 +7,4 @@ Server-side-rendering frontend vanilla TypeScript based on Vite with support of 
 1. Vite build tool is installed (commit: `Vite build tool is installed.`).
 2. Initial VSCode related files (`extensions.json` and `settings.json`) are added.
 3. Git repos is created (commit: `Git repos is created.`).
+4. TypeScript is added and Types are injected into `server.ts` (commit: `TS is setup and configured.`).
