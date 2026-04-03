@@ -1,7 +1,7 @@
 import typescriptLogo from './typescript.svg'
 
 export function render(_url: string) {
-  const html = `
+    const html = `
     <div>
       <a href="https://vite.dev" target="_blank">
         <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -18,5 +18,5 @@ export function render(_url: string) {
       </p>
     </div>
   `
-  return { html }
+    return { html }
 }

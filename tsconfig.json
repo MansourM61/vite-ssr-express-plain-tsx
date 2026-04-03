@@ -1,11 +1,16 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
-    "references": [
-        {
-            "path": "./tsconfig.app.json"
-        },
-        {
-            "path": "./tsconfig.web.json"
-        }
-    ]
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "types": ["vite/client"],
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "moduleDetection": "force"
+        /* Path aliases */
+    },
+    "include": ["src"],
+    "exclude": ["server.ts", "vite.config.ts"]
 }

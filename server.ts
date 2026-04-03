@@ -2,11 +2,11 @@
  * Express.js Server with support of TS
  */
 import fs from 'node:fs/promises'
-import express from 'express'
-import dotenv from 'dotenv'
-import type { ViteDevServer } from 'vite'
 import path from 'node:path'
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url'
+import dotenv from 'dotenv'
+import express from 'express'
+import type { ViteDevServer } from 'vite'
 
 // Constants
 dotenv.config()
@@ -15,11 +15,10 @@ const port = process.env['PORT'] || 5173
 const base = process.env['BASE'] || '/'
 
 // path utilities
-const __dirname: string = path.dirname(fileURLToPath(import.meta.url));
-const root: string = process.cwd();
-const resolve = (_path: string) => path.resolve(__dirname, _path);
-const resolveToPath = (_path: string) => pathToFileURL(resolve(_path));
-
+const __dirname: string = path.dirname(fileURLToPath(import.meta.url))
+const root: string = process.cwd()
+const resolve = (_path: string) => path.resolve(__dirname, _path)
+const resolveToPath = (_path: string) => pathToFileURL(resolve(_path))
 
 // Cached production assets
 const templateHtml = isProduction
@@ -30,7 +29,7 @@ const templateHtml = isProduction
 const app = express()
 
 // Add Vite or respective production middlewares
-let vite: ViteDevServer;
+let vite: ViteDevServer
 if (!isProduction) {
     const { createServer } = await import('vite')
     vite = await createServer({
@@ -51,21 +50,22 @@ app.use('*all', async (req, res) => {
     try {
         const url = req.originalUrl.replace(base, '')
 
-        /** @type {string} */
-        let template
-        /** @type {import('./src/entry-server.ts').render} */
-        let render
+        let template: string
+        let render: (x: string) => { head: string; html: string }
         if (!isProduction) {
             // Always read fresh template in development
             template = await fs.readFile('./index.html', 'utf-8')
             template = await vite.transformIndexHtml(url, template)
-            render = (await vite.ssrLoadModule('/src/entry-server.ts'))['render']
+            render = (await vite.ssrLoadModule('/src/entry-server.ts'))[
+                'render'
+            ]
         } else {
             template = templateHtml
 
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            render = (await import(resolveToPath('./server/entry-server.js'))).render
+            // @ts-expect-error
+            render = (await import(resolveToPath('./server/entry-server.js')))
+                .render
         }
 
         const rendered = await render(url)
@@ -78,11 +78,10 @@ app.use('*all', async (req, res) => {
     } catch (e) {
         if (e instanceof Error) {
             if (!isProduction) {
-                vite && vite.ssrFixStacktrace(e)
+                vite?.ssrFixStacktrace(e)
                 console.log(e.stack)
                 res.status(500).end(e.stack)
-            }
-            else {
+            } else {
                 res.status(500).end(e.message)
             }
         } else {

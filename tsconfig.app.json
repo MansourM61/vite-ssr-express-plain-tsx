@@ -5,9 +5,7 @@
         "rootDir": "./",
         "outDir": "dist",
         /* added types from @types */
-        "types": [
-            "bun"
-        ],
+        "types": ["bun"],
         /* Bundler mode */
         "moduleResolution": "bundler",
         /* transpilation settings */
@@ -21,15 +19,7 @@
         /* we need to unset `allowImportingTsExtensions` for `noEmit` to work. */
         "allowImportingTsExtensions": false
     },
-    "files": [
-        "server.ts"
-    ],
-    "include": [
-        "./server",
-        "server.ts"
-    ],
-    "exclude": [
-        "./client",
-        "./vite.config.ts"
-    ]
+    "files": ["server.ts"],
+    "include": ["server.ts"],
+    "exclude": ["src", "vite.config.ts"]
 }
