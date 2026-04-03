@@ -1,6 +1,6 @@
 # Vite+SSR+Express+Plain+TSX 
 
-Server-side-rendering frontend vanilla TypeScript based on Vite with support of TSX and Express.js server
+Server-side-rendering SPA frontend vanilla TypeScript based on Vite with support of TSX and Express.js server
 
 ## Scaffolding Steps
 
@@ -9,3 +9,4 @@ Server-side-rendering frontend vanilla TypeScript based on Vite with support of 
 3. Git repos is created (commit: `Git repos is created.`).
 4. TypeScript is added and Types are injected into `server.ts` (commit: `TS is setup and configured.`).
 5. Server build and preview scripts are adjusted  (commit: `Build and preview scripts are fixed.`).
+6. Bug with Windows build is fixed (commit: `Windows build bug is fixed.`).

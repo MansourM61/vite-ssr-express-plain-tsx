@@ -1,9 +1,11 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        "composite": true,
         "useDefineForClassFields": true,
         "skipLibCheck": true,
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
         /* Bundler mode */
         "allowImportingTsExtensions": true,
         "isolatedModules": true,
@@ -26,6 +28,6 @@
         "noErrorTruncation": false,
         "exactOptionalPropertyTypes": false,
         "allowJs": true,
-        "checkJs": false, // for each file to be checked, add `// @ts-check` as the first line
-    },
+        "checkJs": false // for each file to be checked, add `// @ts-check` as the first line
+    }
 }
