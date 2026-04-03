@@ -1,0 +1,8 @@
+{
+    "publicDir": "public",
+    "envPrefix": "VITE_",
+    "webHost": "localhost",
+    "webPort": "3700",
+    "apiHost": "localhost",
+    "apiPort": "3800"
+}

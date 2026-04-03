@@ -5,12 +5,12 @@
         "target": "esnext",
         "module": "esnext",
         "lib": ["ES2022", "DOM", "DOM.Iterable"],
-        "types": ["vite/client"],
+        "types": ["vite/client", "unplugin-turbo-console/client"],
         /* Bundler mode */
         "moduleResolution": "bundler",
         "moduleDetection": "force"
         /* Path aliases */
     },
-    "include": ["src"],
+    "include": ["src", "vite.config.ts"],
     "exclude": ["launcher", "vite.config.ts"]
 }

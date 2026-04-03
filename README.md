@@ -12,3 +12,4 @@ Server-side-rendering SPA frontend vanilla TypeScript based on Vite with support
 6. Bug with Windows build is fixed (commit: `Windows build bug is fixed.`).
 7. Tailwind CSS utility library is added.
 8. Landing page is re-arranged and built (commit: `Landing page is created.`).
+9. .env feature as well as using default configuration values from a config file are added (commit: `.env and configuration fallback values are added.`).

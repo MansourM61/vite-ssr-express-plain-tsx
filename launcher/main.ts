@@ -8,17 +8,23 @@ import dotenv from 'dotenv'
 import express from 'express'
 import type { ViteDevServer } from 'vite'
 
-// Constants
-dotenv.config()
-const isProduction = process.env['NODE_ENV'] === 'production'
-const port = process.env['PORT'] || 5173
-const base = process.env['BASE'] || '/'
-
 // path utilities
 const __dirname: string = path.dirname(fileURLToPath(import.meta.url))
 const root: string = process.cwd()
 const resolve = (_path: string) => path.resolve(__dirname, _path)
 const resolveToPath = (_path: string) => pathToFileURL(resolve(_path))
+
+const defConfigs_raw = await fs.readFile(
+    resolveToPath('../vite.default.json'),
+    'utf-8'
+)
+const defConfigs = JSON.parse(defConfigs_raw)
+
+// Constants
+dotenv.config()
+const isProduction = process.env['NODE_ENV'] === 'production'
+const port = parseInt(process.env['VITE_WEB_PORT'] || defConfigs.webPort, 10)
+const base = process.env['BASE'] || '/'
 
 // Cached production assets
 const templateHtml = isProduction
