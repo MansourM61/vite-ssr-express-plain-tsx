@@ -1,22 +1,9 @@
-import typescriptLogo from './typescript.svg'
-
 export function render(_url: string) {
-    const html = `
-    <div>
-      <a href="https://vite.dev" target="_blank">
-        <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-        <img src="${typescriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-      </a>
-      <h1>Hello Vite!</h1>
-      <div class="card">
-        <button id="counter" type="button"></button>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite logo to learn more
-      </p>
-    </div>
+    const html = /*html*/ `
+    <section class="flex flex-col grow gap-6.25 place-content-center place-items-center ">
+        <h1 class="text-5xl text-amber-100 mt-10">Vite Build Tool</h1>
+        <button class="bg-gray-700 py-1 px-2 rounded-lg border-2 border-blue-600 text-gray-300" id="counter" type="button" class="counter"></button>
+    </section>
   `
     return { html }
 }

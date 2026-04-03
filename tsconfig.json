@@ -12,5 +12,5 @@
         /* Path aliases */
     },
     "include": ["src"],
-    "exclude": ["server.ts", "vite.config.ts"]
+    "exclude": ["launcher", "vite.config.ts"]
 }

@@ -2,8 +2,8 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "rootDir": "./",
-        "outDir": "dist",
+        "rootDir": "./launcher",
+        "outDir": "./dist",
         /* added types from @types */
         "types": ["bun"],
         /* Bundler mode */
@@ -11,15 +11,10 @@
         /* transpilation settings */
         "module": "esnext",
         "target": "esnext",
-        "declaration": true,
-        "sourceMap": true,
-        "declarationMap": true,
         /* `noEmit` is required because we want to compile the TS file into JS. */
-        "noEmit": false,
-        /* we need to unset `allowImportingTsExtensions` for `noEmit` to work. */
-        "allowImportingTsExtensions": false
+        "noEmit": false
     },
-    "files": ["server.ts"],
-    "include": ["server.ts"],
+    "files": ["launcher/main.ts"],
+    "include": ["launcher"],
     "exclude": ["src", "vite.config.ts"]
 }
