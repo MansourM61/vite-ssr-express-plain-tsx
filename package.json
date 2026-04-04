@@ -5,7 +5,7 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "bun run --hot ./launcher/main.ts",
+        "dev": "bun run --hot ./launcher/main.ts ",
         "build": "bun run clean && bun run build:client-entry && bun run build:server-entry && bun run build:server-app",
         "build:client-entry": "vite build --outDir dist/client",
         "build:server-entry": "vite build --ssr src/entry-server.ts --outDir dist/server",
@@ -13,7 +13,7 @@
         "preview": "cross-env NODE_ENV=production node ./dist/main.js",
         "format": "bunx --bun @biomejs/biome format --write .",
         "lint": "bunx --bun @biomejs/biome check --write",
-        "check-types": "tsc --noEmit && tsc --noEmit -p ./tsconfig.app.json",
+        "check-types": "tsc --noEmit",
         "clean": "rimraf ./dist",
         "prepare": "husky"
     },

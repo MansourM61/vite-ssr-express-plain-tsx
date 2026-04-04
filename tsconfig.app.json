@@ -5,16 +5,24 @@
         "rootDir": "./launcher",
         "outDir": "./dist",
         /* added types from @types */
-        "types": ["bun"],
+        "lib": ["ESNext"],
+        "types": ["bun", "vite/client", "unplugin-turbo-console/client"],
         /* Bundler mode */
         "moduleResolution": "bundler",
         /* transpilation settings */
         "module": "esnext",
         "target": "esnext",
         /* `noEmit` is required because we want to compile the TS file into JS. */
-        "noEmit": false
+        "noEmit": false,
+        /* Bundler mode */
+        "moduleDetection": "force",
+        /* Path aliases */
+        "paths": {
+            "@/*": ["./*"],
+            "@app/*": ["./launcher/*"],
+            "@app-lib/*": ["./launcher/lib/*"]
+        }
     },
     "files": ["launcher/main.ts"],
-    "include": ["launcher"],
-    "exclude": ["src", "vite.config.ts"]
+    "include": ["launcher"]
 }

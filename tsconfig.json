@@ -2,15 +2,30 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "lib": ["ES2022", "DOM", "DOM.Iterable"],
-        "types": ["vite/client", "unplugin-turbo-console/client"],
+        "rootDir": "./",
+        "outDir": "./dist",
+        /* added types from @types */
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "types": ["bun", "vite/client", "unplugin-turbo-console/client"],
         /* Bundler mode */
         "moduleResolution": "bundler",
-        "moduleDetection": "force"
+        /* transpilation settings */
+        "module": "esnext",
+        "target": "esnext",
+        /* `noEmit` is required because we want to compile the TS file into JS. */
+        "noEmit": true,
+        /* Bundler mode */
+        "moduleDetection": "force",
         /* Path aliases */
+        "paths": {
+            "@/*": ["./*"],
+            "@app/*": ["./launcher/*"],
+            "@src/*": ["./src/*"],
+            "@app-lib/*": ["./launcher/lib/*"],
+            "@src-lib/*": ["./src/lib/*"]
+        }
     },
-    "include": ["src", "vite.config.ts"],
-    "exclude": ["launcher", "vite.config.ts"]
+    "files": ["./vite.config.ts"],
+    "include": ["launcher", "src"],
+    "exclude": ["dist", "node_modules"]
 }
