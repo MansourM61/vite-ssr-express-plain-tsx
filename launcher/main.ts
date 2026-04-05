@@ -7,28 +7,44 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import dotenv from 'dotenv'
 import express from 'express'
 import type { ViteDevServer } from 'vite'
+import defConstants from './lib/constant' // no aliases can be used if the launcher is build using tsc.
+import { loadDefConf } from './lib/utils'
 
 // path utilities
 const __dirname: string = path.dirname(fileURLToPath(import.meta.url))
-const root: string = process.cwd()
-const resolve = (_path: string) => path.resolve(__dirname, _path)
-const resolveToPath = (_path: string) => pathToFileURL(resolve(_path))
+const __root: string = process.cwd()
+const resolve = (inBase: string, inPath: string) => path.resolve(inBase, inPath)
+const resolveToURL = (inBase: string, inPath: string) =>
+    pathToFileURL(resolve(inBase, inPath))
 
-const defConfigs_raw = await fs.readFile(
-    resolveToPath('../vite.default.json'),
-    'utf-8'
+// load the file containing default configurations
+const defConfigs = await loadDefConf(
+    resolveToURL(__root, defConstants.confFile)
 )
-const defConfigs = JSON.parse(defConfigs_raw)
 
 // Constants
 dotenv.config()
 const isProduction = process.env['NODE_ENV'] === 'production'
-const port = parseInt(process.env['VITE_WEB_PORT'] || defConfigs.webPort, 10)
-const base = process.env['BASE'] || '/'
+const webHost =
+    process.env['VITE_WEB_HOST'] || (defConfigs['webHost'] as string)
+const webPort = parseInt(
+    process.env['VITE_WEB_PORT'] || (defConfigs['webPort'] as string),
+    10
+)
+const base = process.env['VITE_BASE'] || (defConfigs['webBase'] as string)
 
 // Cached production assets
 const templateHtml = isProduction
-    ? await fs.readFile(resolveToPath('./client/index.html'), 'utf-8')
+    ? await fs.readFile(
+          resolveToURL(
+              __dirname,
+              path.join(
+                  defConstants.clientBuildPath,
+                  defConstants.entryHtmlFile
+              )
+          ),
+          'utf-8'
+      )
     : ''
 
 // Create http server
@@ -45,10 +61,15 @@ if (!isProduction) {
     })
     app.use(vite.middlewares)
 } else {
+    const clientRootFolder = resolveToURL(
+        __dirname,
+        defConstants.clientBuildPath
+    ).pathname
+
     const compression = (await import('compression')).default
     const sirv = (await import('sirv')).default
     app.use(compression())
-    app.use(base, sirv('./dist/client', { extensions: [] }))
+    app.use(base, sirv(clientRootFolder, { extensions: [] }))
 }
 
 // Serve HTML
@@ -59,19 +80,30 @@ app.use('*all', async (req, res) => {
         let template: string
         let render: (x: string) => { head: string; html: string }
         if (!isProduction) {
+            const entryServerPoint = resolveToURL(
+                __root,
+                path.join('src', defConstants.entryServerScript + '.ts')
+            )
             // Always read fresh template in development
-            template = await fs.readFile('./index.html', 'utf-8')
+            template = await fs.readFile(defConstants.entryHtmlFile, 'utf-8')
             template = await vite.transformIndexHtml(url, template)
-            render = (await vite.ssrLoadModule('/src/entry-server.ts'))[
+            render = (await vite.ssrLoadModule(entryServerPoint.pathname))[
                 'render'
             ]
         } else {
             template = templateHtml
 
+            const entryServerPoint = resolveToURL(
+                __dirname,
+                path.join(
+                    defConstants.serverBuildPath,
+                    defConstants.entryServerScript + '.js'
+                )
+            )
+
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
-            render = (await import(resolveToPath('./server/entry-server.js')))
-                .render
+            render = (await import(entryServerPoint))['render']
         }
 
         const rendered = await render(url)
@@ -98,6 +130,6 @@ app.use('*all', async (req, res) => {
 })
 
 // Start http server
-app.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}`)
+app.listen(webPort, webHost, () => {
+    console.log(`Server started at http://${webHost}:${webPort}`)
 })

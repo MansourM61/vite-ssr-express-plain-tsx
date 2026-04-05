@@ -6,7 +6,7 @@
         "outDir": "./dist",
         /* added types from @types */
         "lib": ["ESNext"],
-        "types": ["bun", "vite/client", "unplugin-turbo-console/client"],
+        "types": ["bun"],
         /* Bundler mode */
         "moduleResolution": "bundler",
         /* transpilation settings */
@@ -16,7 +16,11 @@
         "noEmit": false,
         /* Bundler mode */
         "moduleDetection": "force",
-        /* Path aliases */
+        /* Path aliases 
+        Note about the path aliases related to the launcher:
+        These path aliases are only applicable if the launcher script is built using bun (i.e. `bun run build:bun).
+        If TypeScript build (i.e. `bun run build:server-app`) is used, these aliases cannot be used.
+        */
         "paths": {
             "@/*": ["./*"],
             "@app/*": ["./launcher/*"],
@@ -24,5 +28,5 @@
         }
     },
     "files": ["launcher/main.ts"],
-    "include": ["launcher"]
+    "include": ["./launcher/*"]
 }

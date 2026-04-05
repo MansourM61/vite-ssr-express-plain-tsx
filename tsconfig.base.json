@@ -4,7 +4,6 @@
         "useDefineForClassFields": true,
         "skipLibCheck": true,
         /* Bundler mode */
-        // "allowImportingTsExtensions": true,
         "isolatedModules": true,
         "verbatimModuleSyntax": true,
         "noEmit": true,
