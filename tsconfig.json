@@ -21,9 +21,14 @@
             "@/*": ["./*"],
             "@app/*": ["./launcher/*"],
             "@src/*": ["./src/*"],
+            "@lib/*": ["./src/lib/*"],
+            "@components/*": ["./src/components/*"],
             "@app-lib/*": ["./launcher/lib/*"],
             "@src-lib/*": ["./src/lib/*"]
-        }
+        },
+        /* JSX/TSX support */
+        "jsx": "preserve", // keep the JSX syntax so that `jsx-dom` can convert it.
+        "jsxImportSource": "jsx-dom" // imports the types, functions, etc
     },
     "files": ["./vite.config.ts"],
     "include": ["launcher", "src"],

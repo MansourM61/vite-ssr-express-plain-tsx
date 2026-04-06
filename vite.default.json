@@ -4,6 +4,5 @@
     "webHost": "localhost",
     "webPort": "3700",
     "webBase": "/",
-    "apiHost": "localhost",
-    "apiPort": "3800"
+    "apiAddress": "https://fakeapi.net/"
 }

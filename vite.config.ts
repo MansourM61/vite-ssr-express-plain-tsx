@@ -16,10 +16,7 @@ export default defineConfig(({ mode, command }): UserConfig => {
 
     // load all environment variables from `.env` files because `import.meta.env` is not available here
     const env = loadEnv(mode, envDir, defConfigs.envPrefix)
-    const WEB_HOST = env['VITE_WEB_HOST'] ?? defConfigs.webHost
-    const WEB_PORT = parseInt(env['VITE_WEB_PORT'] ?? defConfigs.webPort, 10)
-    const API_HOST = env['VITE_API_HOST'] ?? defConfigs.apiHost
-    const API_PORT = parseInt(env['VITE_API_PORT'] ?? defConfigs.apiPort, 10)
+    const API_ADDRESS = env['VITE_API_ADDRESS'] ?? defConfigs.apiAddress
 
     // common configuration shared all environment
     const sharedConfig = {
@@ -41,12 +38,13 @@ export default defineConfig(({ mode, command }): UserConfig => {
             tailwindcss(),
         ],
         resolve: {
-            alias: {
-                '@': fileURLToPath(new URL('./src', import.meta.url)),
-                '@assets': fileURLToPath(
-                    new URL('./src/assets', import.meta.url)
-                ),
-            },
+            tsconfigPaths: true, // resolve imports using TypeScript's path definition (replaces resolve.alias). If you want to directly run `vite build` in the commandline, you must manually resolve the path aliases here:
+            // alias: {
+            //     '@': fileURLToPath(new URL('./src', import.meta.url)),
+            //     '@assets': fileURLToPath(
+            //         new URL('./src/assets', import.meta.url)
+            //     ),
+            // }
         },
         appType: 'spa', // all requests to all routes will be directed to "index.html".
         build: {
@@ -56,10 +54,31 @@ export default defineConfig(({ mode, command }): UserConfig => {
             allowedHosts: true, // to allow all incoming request from all addresses
         },
         server: {
-            host: WEB_HOST,
-            port: WEB_PORT,
+            middlewareMode: true,
             proxy: {
-                '/api': `http://${API_HOST}:${API_PORT}`,
+                // '/api': `${API_ADDRESS}`,
+                '/api': {
+                    target: 'https://fakeapi.net/products',
+                    changeOrigin: true,
+                    rewrite: (path) => path.replace(/^\/api/, ''),
+                },
+            },
+        },
+        oxc: {
+            jsx: {
+                // use Vite to transform any JSX syntax
+                runtime: 'automatic', // automatically add import JSX package for JSX/TSX files
+                development: true, // enable development specific transforms ??
+                throwIfNamespace: true, // throw error if the XML namespaced tag names (e.g. <foo:bar baz:qux="foobar" />) are used.
+                pure: false, // enable pure annotation (annotation comments that can be safely removed) for JSX elements
+                importSource: 'jsx-dom', // the package to be automatically imported for JSX/TSX file
+                pragma: 'React.createElement', // h factory function
+                pragmaFrag: 'React.Fragment', // fragment element
+            },
+            // When transforming TSX files:
+            typescript: {
+                jsxPragma: 'React.createElement', // same value with `jsx.pragma`
+                jsxPragmaFrag: 'React.Fragment', // same value with `jsx.pragmaFrag`
             },
         },
     } satisfies UserConfig
