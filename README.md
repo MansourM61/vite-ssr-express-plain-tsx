@@ -17,3 +17,5 @@ Server-side-rendering SPA frontend vanilla TypeScript based on Vite with support
 11. Generalised path name and URL are used to refer to the assets, etc.
 12. Default configuration is added as fallback (commit: `Default configuration, and generalised path/URL are added.`)
 13. JSX and proxy features are added. (commit: `JSX and proxy are added.`). 
+14. Vitest support is added (commit: `Vitest support is added.`).
+

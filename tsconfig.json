@@ -30,7 +30,7 @@
         "jsx": "preserve", // keep the JSX syntax so that `jsx-dom` can convert it.
         "jsxImportSource": "jsx-dom" // imports the types, functions, etc
     },
-    "files": ["./vite.config.ts"],
-    "include": ["launcher", "src"],
+    "files": ["./vite.config.ts", "./vitest.config.ts"],
+    "include": ["**/*.ts", "**/*.tsx"],
     "exclude": ["dist", "node_modules"]
 }
