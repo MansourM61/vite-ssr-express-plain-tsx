@@ -20,3 +20,10 @@ Server-side-rendering SPA frontend vanilla TypeScript based on Vite with support
 14. Vitest support is added (commit: `Vitest support is added.`).
 15. Playwright support is added (commit: `Playwright support is added.`).
 16. Documentation based on TypeDoc is added (commit: `TypeDoc documentation is added.`).
+17. Readme documentation is updated with the instruction to extend the project (commit: `Readme document is updated.`).
+
+## Instruction
+
+1. The library files for the server (launcher) are placed in `launcher/lib`, and can be imported using relative-path imports.
+2. All the server routes are defined in the `launcher/main.ts` file.
+3. The web (Vite server) codes are all placed in `src` folder with all components placed in `src/components` and library files in `src/lib`.
