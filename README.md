@@ -1,6 +1,6 @@
-# Vite+SSR+Express+Plain+TSX 
+# Vite+SSR+SPA+Express+Plain+TSX 
 
-Server-side-rendering SPA frontend vanilla TypeScript based on Vite with support of TSX and Express.js server
+Server-side-rendering single-page-application frontend vanilla TypeScript based on Vite with support of TSX and Express.js server
 
 ## Scaffolding Steps
 
