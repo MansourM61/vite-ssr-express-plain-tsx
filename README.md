@@ -19,3 +19,4 @@ Server-side-rendering SPA frontend vanilla TypeScript based on Vite with support
 13. JSX and proxy features are added. (commit: `JSX and proxy are added.`). 
 14. Vitest support is added (commit: `Vitest support is added.`).
 15. Playwright support is added (commit: `Playwright support is added.`).
+16. Documentation based on TypeDoc is added (commit: `TypeDoc documentation is added.`).

@@ -15,7 +15,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
  * @param {string} inPath file/folder path which is relative to the base path
  * @returns {string} resolved path
  */
-export const resolve = (inBase: string, inPath: string): string =>
+export const resolve = (inBase: string, inPath: string) =>
     path.resolve(inBase, inPath)
 
 /**

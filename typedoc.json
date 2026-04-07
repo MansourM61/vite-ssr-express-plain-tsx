@@ -1,0 +1,50 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": ["./src/lib/*.ts"],
+    "entryPointStrategy": "expand",
+    "projectDocuments": ["./README.md", "./docs/Customisation.md"],
+    "exclude": ["**/*+(index|.spec|.e2e).ts"],
+    "name": "Data Vault UI Server",
+    "includeVersion": true,
+    "out": "out/typedoc",
+    "highlightLanguages": [
+        "bash",
+        "console",
+        "css",
+        "html",
+        "javascript",
+        "json",
+        "jsonc",
+        "json5",
+        "tsx",
+        "typescript"
+    ],
+    "searchInComments": true,
+    "searchInDocuments": true,
+    "navigation": {
+        "includeCategories": true,
+        "includeGroups": false,
+        "includeFolders": true,
+        "compactFolders": false,
+        "excludeReferences": true
+    },
+    "categorizeByGroup": false,
+    "headings": {
+        "readme": true,
+        "document": true
+    },
+    "validation": {
+        "notExported": false,
+        "invalidLink": true,
+        "rewrittenLink": true,
+        "notDocumented": false,
+        "unusedMergeModuleWith": true
+    },
+    // "theme": "hierarchy",
+    "tsconfig": "./tsconfig.json",
+    "plugin": [
+        "typedoc-plugin-coverage",
+        "@shipgirl/typedoc-plugin-versions",
+        "typedoc-theme-hierarchy"
+    ]
+}

@@ -1,5 +1,7 @@
 /**
  * Express.js Server with support of TS
+ *
+ * @module launcher/main
  */
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -8,14 +10,11 @@ import dotenv from 'dotenv'
 import express from 'express'
 import type { ViteDevServer } from 'vite'
 import defConstants from './lib/constant' // no aliases can be used if the launcher is build using tsc.
-import { loadDefConf } from './lib/utils'
+import { loadDefConf, resolveToURL } from './lib/utils'
 
 // path utilities
 const __dirname: string = path.dirname(fileURLToPath(import.meta.url))
 const __root: string = process.cwd()
-const resolve = (inBase: string, inPath: string) => path.resolve(inBase, inPath)
-const resolveToURL = (inBase: string, inPath: string) =>
-    pathToFileURL(resolve(inBase, inPath))
 
 // load the file containing default configurations
 const defConfigs = await loadDefConf(
