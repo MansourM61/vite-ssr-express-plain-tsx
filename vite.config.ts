@@ -46,7 +46,7 @@ export default defineConfig(({ mode, command }): UserConfig => {
             //     ),
             // }
         },
-        appType: 'spa', // all requests to all routes will be directed to "index.html".
+        appType: 'custom', // don't include Vite's default HTML handling middlewares
         build: {
             outDir: 'dist',
         },
